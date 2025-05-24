@@ -1,6 +1,6 @@
-# MontoyaFetch
+# Mariana Montoya Fetch Take Home Assessment
 
-### Summary: Include screen shots or a video of your app highlighting its features
+### Summary: Include screenshots or a video of your app highlighting its features
 
 ### Focus Areas: What specific areas of the project did you prioritize? Why did you choose to focus on these areas?
 
