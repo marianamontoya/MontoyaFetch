@@ -19,7 +19,7 @@ struct Recipe: Codable, Identifiable {
     let photo_url_large: String
     let photo_url_small: String?
     let source_url: String?
-    let youtube_url: String? // Reasoning behind making it optional
+    let youtube_url: String? 
     
     enum CodingKeys: String, CodingKey {
         case id = "uuid"

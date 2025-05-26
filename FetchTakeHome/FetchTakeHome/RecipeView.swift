@@ -9,22 +9,29 @@ import SwiftUI
 
 struct RecipeView: View {
     let recipe: Recipe
+    let captionText: String
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 AsyncImage(url: URL(string: recipe.photo_url_large)) { image in
                     image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
+                        .frame(height: 400)
+                        .overlay(alignment: .bottom) {
+                            CaptionView(text: recipe.name)
+                        }
+                    
                 } placeholder: {
                     ProgressView()
                 }
 
                 Text(recipe.name)
                     .font(.title)
+                    .foregroundColor(.white)
                     .fontWeight(.bold)
-                    .padding(.horizontal)
+                    .padding()
                 
                 if let urlString = recipe.source_url,
                    let url = URL(string: urlString) {
@@ -32,15 +39,21 @@ struct RecipeView: View {
                 } else {
                     Text("Recipe source not available")
                 }
+                
+//                VideoView(videoID: recipe.youtube_url!)
         
             }
         }
+        .ignoresSafeArea(edges: .top)
     }
     
     init(recipe: Recipe) {
         self.recipe = recipe
+        self.captionText = recipe.name
     }
 }
+
+
 
 #Preview {
     let sampleRecipe = Recipe(

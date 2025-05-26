@@ -9,44 +9,49 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var results = [Recipe]()
+    @State private var searchText = ""
+    
     
     
     var body: some View {
-        Text("Recipe App")
-            .font(.largeTitle)
-        
-        //        If the recipes list is empty, the app should display
-        //        an empty state to inform users that no recipes are available.
-        if results.isEmpty{
-            VStack(alignment: .leading){
-                Image(systemName: "exclamationmark.magnifyingglass")
-                    .resizable()
-                    .scaledToFit()
-                
-                Text("Sorry for the inconvenience, currently there are no recipes available. Please check back soon.")
-                    .padding(10)
-                    .font(.headline)
-                    .fontDesign(.rounded)
-                    .foregroundColor(.blue)
-                    .ignoresSafeArea()
-                
-                
-            }
-        }
-        
-        
         // List of Recipes
         NavigationStack {
-            List(results) { item in
+            Text("Recipe App")
+                .font(.custom("AmericanTypewriter", size: 50))
+                .fontWeight(.bold)
+            Text("By: Mariana Montoya")
+                .font(.custom("AmericanTypewriter", size: 20))
+            
+            
+            //        If the recipes list is empty, the app should display
+            //        an empty state to inform users that no recipes are available.
+            if results.isEmpty{
+                VStack(alignment: .leading){
+                    Image(systemName: "exclamationmark.magnifyingglass")
+                        .resizable()
+                        .scaledToFit()
+                    
+                    Text("Sorry for the inconvenience, currently there are no recipes available. Please check back soon.")
+                        .padding(10)
+                        .font(.headline)
+                        .fontDesign(.rounded)
+                        .foregroundColor(.blue)
+                        .ignoresSafeArea()
+                    
+                    
+                }
+            }
+            
+            
+            List(results, id: \.id) { item in
                 NavigationLink {
                     RecipeView(recipe: item)
                 } label: {
                     HStack {
-                        AsyncImage(url: URL(string: item.photo_url_large)) { image in
-                            image.resizable()
-                        } placeholder: {
-                            ProgressView()
-                        }
+                        AsyncImageView(
+                            url: URL(string: item.photo_url_large)!,
+                            placeholder: Image(systemName: "birthday.cake.fill")
+                        )
                         .frame(width: 100, height: 100)
                         .cornerRadius(8)
                         
@@ -55,6 +60,7 @@ struct ContentView: View {
                                 .font(.headline)
                             Text(item.cuisine)
                                 .font(.caption)
+                            
                         }
                     }
                 }
@@ -69,6 +75,8 @@ struct ContentView: View {
         }
     }
     
+    
+    
     func loadData() async {
         // 1. Get the URL
         
@@ -82,13 +90,20 @@ struct ContentView: View {
             let (data, _) = try await URLSession.shared.data(from: url)
             
             // 3. Decode that result into a response struct
-            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
+            do {
+                let decodedResponse = try JSONDecoder().decode(Response.self, from: data)
                 results = decodedResponse.recipes
+            } catch {
+                // Catching if the JSON is malformatted
+                results = []
+                print("Failed to decode due to malfomatted JSON: \(error.localizedDescription)")
             }
+            
         } catch {
-            print("Decoding failed: \(error)")
+            print("Network or data fetch error: \(error.localizedDescription)")
         }
     }
+    
 }
 
 #Preview {
