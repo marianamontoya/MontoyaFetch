@@ -17,9 +17,10 @@ struct CaptionView: View {
             .background(Color("Text Contrast").opacity(0.75),
                         in: RoundedRectangle(cornerRadius: 10.0, style: .continuous))
             .padding()
+        
     }
 }
 
 #Preview {
-    CaptionView(text: "Hello World")
+    CaptionView(text: "Recipe Caption View").preferredColorScheme(.dark)
 }

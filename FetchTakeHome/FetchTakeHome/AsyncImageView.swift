@@ -22,6 +22,7 @@ struct AsyncImageView: View {
                     .resizable()
             }
         }
+        // Adding allows to save effiency for when the user does not directly need it
         .onAppear {
             loader.load(from: url)
         }
@@ -33,8 +34,8 @@ struct AsyncImageView: View {
 #Preview {
     AsyncImageView(
         url: URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpg")!,
-        placeholder: Image(systemName: "person.circle")
+        placeholder: Image(systemName: "birthday.cake.fill")
         
     )
-    .frame(width: 200, height: 200)
+    .frame(width: 300, height: 300)
 }

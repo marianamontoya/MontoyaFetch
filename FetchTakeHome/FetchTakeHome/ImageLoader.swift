@@ -11,8 +11,10 @@ import UIKit
 
 final class ImageLoader: ObservableObject {
     @Published var image: UIImage?
-
+    
+    // For recently used images such as these
     private static let memoryCache = NSCache<NSURL, UIImage>()
+    // Using for lightweight with ephemeral which has no persistent storage
     private static let session = URLSession(configuration: .ephemeral)
     private var task: URLSessionDataTask?
     private var url: URL?
@@ -26,7 +28,7 @@ final class ImageLoader: ObservableObject {
             return
         }
 
-        // Check disk cache
+        // Check disk cache if found adds to memory cache
         if let diskCached = DiskImageCache.shared.image(for: url) {
             Self.memoryCache.setObject(diskCached, forKey: url as NSURL)
             self.image = diskCached
@@ -36,6 +38,7 @@ final class ImageLoader: ObservableObject {
         // Fetch from network
         task = Self.session.dataTask(with: url) { [weak self] data, _, error in
             guard
+                // downloads the image to the background
                 let self = self,
                 self.url == url,
                 let data = data,

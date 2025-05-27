@@ -11,39 +11,51 @@ struct ContentView: View {
     @State private var results = [Recipe]()
     @State private var searchText = ""
     
-    
+    var filteredResults: [Recipe] {
+        if searchText.isEmpty {
+            return results
+        } else {
+            return results.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.cuisine.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View {
-        // List of Recipes
         NavigationStack {
             Text("Recipe App")
                 .font(.custom("AmericanTypewriter", size: 50))
                 .fontWeight(.bold)
-            Text("By: Mariana Montoya")
-                .font(.custom("AmericanTypewriter", size: 20))
+            Link(destination: URL(string: "https://www.linkedin.com/in/-marianamontoya/")!) {
+                Text("By: Mariana Montoya")
+                    .font(.custom("AmericanTypewriter", size: 20))
+                    .foregroundColor(.black)
+            }
             
-            
-            //        If the recipes list is empty, the app should display
-            //        an empty state to inform users that no recipes are available.
+            TextField("Search by Recipe Name or Cuisine Type", text: $searchText)
+                .font(.custom("AmericanTypewriter", size: 15))
+                .textFieldStyle(.automatic)
+                .padding(.all)
+
+            //  If the recipes list is empty, the app should display:
             if results.isEmpty{
                 VStack(alignment: .leading){
                     Image(systemName: "exclamationmark.magnifyingglass")
                         .resizable()
                         .scaledToFit()
-                    
+        
+                    //  an empty state to inform users that no recipes are available.
                     Text("Sorry for the inconvenience, currently there are no recipes available. Please check back soon.")
                         .padding(10)
                         .font(.headline)
                         .fontDesign(.rounded)
                         .foregroundColor(.blue)
                         .ignoresSafeArea()
-                    
-                    
                 }
             }
-            
-            
-            List(results, id: \.id) { item in
+            // List of Recipes
+            List(filteredResults, id: \.id) { item in
                 NavigationLink {
                     RecipeView(recipe: item)
                 } label: {
@@ -57,53 +69,34 @@ struct ContentView: View {
                         
                         VStack(alignment: .leading) {
                             Text(item.name)
-                                .font(.headline)
-                            Text(item.cuisine)
-                                .font(.caption)
+                                .font(.custom("AmericanTypewriter", size: 20))
+                            Text("Cuisine: \(item.cuisine)")
+                                .font(.custom("AmericanTypewriter", size: 15))
                             
                         }
                     }
                 }
             }
+
             .task {
-                await loadData()
+                await loadRecipes()
             }
             // Refreshing the data by scrolling down
             .refreshable {
-                await loadData()
+                await loadRecipes()
             }
         }
     }
-    
-    
-    
-    func loadData() async {
-        // 1. Get the URL
-        
-        guard let url = URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") else {
-            print("Invalid URL")
-            return
+            func loadRecipes() async {
+                if let url = URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") {
+                    do {
+                        results = try await LoadData.loadData(from: url)
+                    } catch {
+                        print("Error loading recipes: \(error.localizedDescription)")
+                        results = []
+                    }
+                }
         }
-        
-        // 2. Fetch the data
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            
-            // 3. Decode that result into a response struct
-            do {
-                let decodedResponse = try JSONDecoder().decode(Response.self, from: data)
-                results = decodedResponse.recipes
-            } catch {
-                // Catching if the JSON is malformatted
-                results = []
-                print("Failed to decode due to malfomatted JSON: \(error.localizedDescription)")
-            }
-            
-        } catch {
-            print("Network or data fetch error: \(error.localizedDescription)")
-        }
-    }
-    
 }
 
 #Preview {
