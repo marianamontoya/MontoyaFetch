@@ -18,9 +18,8 @@
 </p>
 
 ### Video Demo
-<iframe width="560" height="315" src="https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q" 
-frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Watch on YouTube](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)
+
 
 
 ### Focus Areas: What specific areas of the project did you prioritize? Why did you choose to focus on these areas?
