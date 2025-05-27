@@ -18,7 +18,8 @@
 </p>
 
 ### Video Demo
-[Watch on YouTube](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)
+[![Watch the video](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)
+
 
 
 
