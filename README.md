@@ -6,21 +6,17 @@
 
 ### Screenshots
 <p align="center">
-  <strong>Content View</strong>
   <img src="https://github.com/marianamontoya/MontoyaFetch/raw/main/Demos/ContentViewDemo.png" width="300" alt="Content View" />
   <br />
 </p>
 
 <p align="center">
-  <strong>Recipe Demo</strong>
   <img src="https://github.com/marianamontoya/MontoyaFetch/raw/main/Demos/RecipeDemo.png" width="300" alt="Recipe Demo" />
   <br />
 </p>
 
 ### Video Demo
-[![Watch the video](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)
-
-
+[Watch on YouTube](https://youtube.com/shorts/7RZ5rubSjvc?si=ojfTlKRNh5WL4Y1q)
 
 
 ### Focus Areas: What specific areas of the project did you prioritize? Why did you choose to focus on these areas?
