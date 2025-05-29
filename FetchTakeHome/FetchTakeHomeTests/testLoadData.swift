@@ -12,7 +12,7 @@ final class testLoadData: XCTestCase {
     
     // Happy Path Test
     
-    func test_successfull_load_data() async throws {
+    func test_successfullLoadData() async throws {
         // Given (Arrange)
         guard let url = URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json") else {
             XCTFail( "Invalid URL" )
@@ -32,7 +32,7 @@ final class testLoadData: XCTestCase {
         }
     }
     
-    func test_load_data_from_invalid_url() async {
+    func test_loadDataFromInvalidUrl() async {
         // Given (Arrange)
         let url = URL(string: "https://invalid/recipes-malformed.json")!
         

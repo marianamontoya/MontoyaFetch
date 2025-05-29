@@ -27,6 +27,7 @@
 		535754B12DE2916D004BCF66 /* FetchTakeHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchTakeHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		535754BE2DE2916E004BCF66 /* FetchTakeHomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchTakeHomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		535754C82DE2916E004BCF66 /* FetchTakeHomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchTakeHomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		535EA1372DE8BD67003C11F8 /* FetchTakeHome.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTakeHome.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -70,6 +71,7 @@
 		535754A82DE2916D004BCF66 = {
 			isa = PBXGroup;
 			children = (
+				535EA1372DE8BD67003C11F8 /* FetchTakeHome.xctestplan */,
 				535754B32DE2916D004BCF66 /* FetchTakeHome */,
 				535754C12DE2916E004BCF66 /* FetchTakeHomeTests */,
 				535754B22DE2916D004BCF66 /* Products */,

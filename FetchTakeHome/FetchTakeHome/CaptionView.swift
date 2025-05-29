@@ -14,13 +14,10 @@ struct CaptionView: View {
             .font(.custom("AmericanTypewriter", size: 50))
             .padding()
             .foregroundColor(.white)
-            .background(Color("Text Contrast").opacity(0.75),
-                        in: RoundedRectangle(cornerRadius: 10.0, style: .continuous))
             .padding()
-        
     }
 }
 
 #Preview {
-    CaptionView(text: "Recipe Caption View").preferredColorScheme(.dark)
+    CaptionView(text: "Recipe Caption Title").preferredColorScheme(.dark)
 }

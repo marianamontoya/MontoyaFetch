@@ -9,7 +9,13 @@ import CryptoKit
 import Foundation
 import UIKit
 
-final class DiskImageCache {
+protocol DiskImageCacheProtocol {
+    func image(for url: URL) -> UIImage?
+    func storeImage(_ image: UIImage, for url: URL)
+}
+
+
+final class DiskImageCache: DiskImageCacheProtocol  {
     static let shared = DiskImageCache()
     // Using the filesystem in order to access cache
     private let fileManager = FileManager.default
@@ -35,7 +41,7 @@ final class DiskImageCache {
         return image
     }
     // Storing the image
-    func store(_ image: UIImage, for url: URL) {
+    func storeImage(_ image: UIImage, for url: URL) {
         let path = cacheDirectory.appendingPathComponent(hashedFilename(for: url))
         guard let data = image.pngData() else { return }
         try? data.write(to: path)
@@ -48,3 +54,5 @@ final class DiskImageCache {
         return hash.compactMap { String(format: "%02x", $0) }.joined()
     }
 }
+
+
